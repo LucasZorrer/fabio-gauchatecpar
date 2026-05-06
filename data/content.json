@@ -1,0 +1,143 @@
+{
+  "site": {
+    "title": "Gaúcha TecPar | Investimentos em telecom e infraestrutura digital",
+    "description": "Gaúcha TecPar: holding de participação em telecom e infraestrutura digital, com foco atual na Brasil TecPar."
+  },
+  "hero": {
+    "eyebrow": "Investimentos em TI e Telecom",
+    "title": "Gaúcha TecPar",
+    "copy": "Holding de participação em telecom e infraestrutura digital. Hoje, seu foco de investimento está na Brasil TecPar, plataforma nacional de conectividade, data centers, telefonia e entretenimento.",
+    "primaryCta": "Falar com RI",
+    "secondaryCta": "Conhecer a tese"
+  },
+  "signals": {
+    "origin": {
+      "label": "Origem",
+      "value": "Porto Alegre, RS"
+    },
+    "strategy": {
+      "label": "Estratégia",
+      "value": "Telecom e infraestrutura digital"
+    },
+    "investment": {
+      "label": "Investimento atual",
+      "value": "Brasil TecPar"
+    }
+  },
+  "about": {
+    "label": "Quem somos",
+    "title": "A holding que deu origem à Brasil TecPar",
+    "copy1": "A Gaúcha TecPar foi a semente que deu origem à Brasil TecPar. Com base sólida no setor de Internet e Telecom, a holding direciona hoje seus investimentos exclusivamente para a Brasil TecPar, consolidando sua presença nacional em soluções de conectividade, data centers, telefonia e entretenimento.",
+    "copy2": "A estratégia combina visão empreendedora, disciplina de consolidação e exposição a um mercado essencial para residências, empresas e comunidades.",
+    "caption": "Av. Carlos Gomes, Porto Alegre"
+  },
+  "thesis": {
+    "label": "Tese",
+    "title": "Participar da consolidação de um setor essencial",
+    "copy": "Banda larga, fibra óptica, serviços digitais e infraestrutura de dados formam uma das camadas críticas da economia moderna. A Gaúcha TecPar organiza sua atuação para capturar esse crescimento por meio de uma plataforma operacional em escala.",
+    "cards": [
+      {
+        "title": "Mercado fragmentado",
+        "copy": "O setor brasileiro de ISPs segue pulverizado, criando espaço para consolidação por plataformas com capital, governança e capacidade de integração."
+      },
+      {
+        "title": "Receita recorrente",
+        "copy": "Conectividade é serviço de uso contínuo, com demanda estrutural em residências, empresas, saúde, educação e governo."
+      },
+      {
+        "title": "Escala operacional",
+        "copy": "A Brasil TecPar reúne marcas, rede, clientes e capacidade de execução para crescer em presença nacional e eficiência."
+      }
+    ]
+  },
+  "brasil": {
+    "label": "Brasil TecPar",
+    "title": "A plataforma de investimento da Gaúcha TecPar",
+    "copy": "A Brasil TecPar atua com a premissa de crescer de forma sustentável, gerar valor para acionistas e contribuir para as comunidades onde está presente.",
+    "metrics": [
+      {
+        "label": "Receita líquida 2025",
+        "value": "R$ 1,754 bi"
+      },
+      {
+        "label": "EBITDA ajustado 2025",
+        "value": "R$ 856,9 mi"
+      },
+      {
+        "label": "Acessos banda larga",
+        "value": "1,345 mi"
+      },
+      {
+        "label": "Cidades atendidas",
+        "value": "384"
+      }
+    ],
+    "evidenceTitle": "Governança, escala e disciplina de execução",
+    "evidenceCopy": "A tese se apoia em uma combinação de crescimento orgânico, integração de aquisições e fortalecimento institucional. O foco é preservar uma trajetória de expansão sustentável em um segmento de infraestrutura essencial.",
+    "evidenceLink": "Ver relatórios da Brasil TecPar"
+  },
+  "investors": {
+    "label": "Investidores",
+    "title": "Uma jornada clara para acessar informações",
+    "copy": "O relacionamento com investidores é conduzido por etapas, com entrega progressiva de informações e respeito à confidencialidade de materiais sensíveis.",
+    "steps": [
+      {
+        "title": "Contato inicial",
+        "copy": "Apresentação institucional e alinhamento de perfil."
+      },
+      {
+        "title": "Qualificação",
+        "copy": "Entendimento do objetivo do investidor e do nível de informação necessário."
+      },
+      {
+        "title": "Materiais sob confidencialidade",
+        "copy": "Documentos restritos são compartilhados apenas quando aplicável e mediante procedimento próprio."
+      },
+      {
+        "title": "Reunião com RI",
+        "copy": "Discussão técnica sobre companhia, tese, riscos e próximos passos."
+      }
+    ]
+  },
+  "updates": {
+    "label": "Atualizações",
+    "title": "Eventos relevantes do ecossistema",
+    "items": [
+      {
+        "date": "Março de 2026",
+        "title": "Brasil TecPar reporta lucro líquido em 2025",
+        "copy": "Resultado anual refletiu expansão por aquisições e crescimento da base de assinantes.",
+        "linkText": "Ler notícia"
+      },
+      {
+        "date": "Fevereiro de 2026",
+        "title": "Aquisição da operação de banda larga da Ligga",
+        "copy": "Operação anunciada para fortalecer presença e escala no segmento de fibra óptica.",
+        "linkText": "Ler notícia"
+      },
+      {
+        "date": "Maio de 2025",
+        "title": "Mais de 1 milhão de clientes conectados",
+        "copy": "A integração da Sempre Internet ampliou presença e base operacional da Brasil TecPar.",
+        "linkText": "Ler atualização"
+      }
+    ]
+  },
+  "contact": {
+    "label": "Contato",
+    "title": "Fale com Relações com Investidores",
+    "copy": "Para informações institucionais, agenda com RI ou acesso orientado a materiais de investimento, entre em contato pelos canais oficiais.",
+    "email": "ri@gauchatecpar.com.br",
+    "whatsappRi": "WhatsApp RI: (51) 9 9294-5031",
+    "whatsappFinance": "WhatsApp Financeiro: (51) 9 9141-6447",
+    "address": "Av. Carlos Gomes, 222 - 8º andar - Conj. 1113\nBairro Boa Vista, Porto Alegre - RS, CEP 90480-000",
+    "formButton": "Enviar mensagem",
+    "formNote": "O envio abre seu cliente de email com a mensagem preenchida."
+  },
+  "footer": {
+    "brand": "Gaúcha TecPar",
+    "copy": "© 2026. Todos os direitos reservados.",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Uso"
+  }
+}
