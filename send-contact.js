@@ -1,13 +1,55 @@
 const http = require("http");
+const fs = require("fs");
 const path = require("path");
 const tls = require("tls");
 
 const MAX_BODY_SIZE = 64 * 1024;
 const DEFAULT_SUCCESS_URL = "/?contato=enviado#contato";
 const DEFAULT_ERROR_URL = "/?contato=erro#contato";
+const LOCAL_MAIL_CONFIG = path.join(__dirname, "config", "mail.js");
+
+function mailConfigFromEnv() {
+  const config = {
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    username: process.env.SMTP_USERNAME,
+    password: process.env.SMTP_PASSWORD,
+    fromEmail: process.env.SMTP_FROM_EMAIL,
+    fromName: process.env.SMTP_FROM_NAME || "Site Gaucha TecPar",
+    toEmail: process.env.SMTP_TO_EMAIL,
+    toName: process.env.SMTP_TO_NAME || "Gaucha TecPar",
+  };
+  const values = Object.values(config).filter((value) => String(value || "").trim() !== "");
+
+  if (values.length === 0) {
+    return null;
+  }
+
+  const requiredFields = ["host", "port", "username", "password", "fromEmail", "toEmail"];
+  const missingFields = requiredFields.filter((field) => String(config[field] || "").trim() === "");
+
+  if (missingFields.length > 0) {
+    throw new Error(`Missing SMTP environment fields: ${missingFields.join(", ")}`);
+  }
+
+  return {
+    ...config,
+    port: Number(config.port),
+  };
+}
 
 function loadMailConfig() {
-  return require(path.join(__dirname, "config", "mail.js"));
+  const envConfig = mailConfigFromEnv();
+
+  if (envConfig) {
+    return envConfig;
+  }
+
+  if (fs.existsSync(LOCAL_MAIL_CONFIG)) {
+    return require(LOCAL_MAIL_CONFIG);
+  }
+
+  throw new Error("Missing SMTP configuration.");
 }
 
 function cleanHeader(value) {

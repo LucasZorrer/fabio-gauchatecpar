@@ -5,6 +5,6 @@ module.exports = {
   password: "sua-senha",
   fromEmail: "seu-email@nuvolahost.com.br",
   fromName: "Site Gaucha TecPar",
-  toEmail: "seu-email@nuvolahost.com.br",
+  toEmail: "ri@gauchatecpar.com.br",
   toName: "Gaucha TecPar",
 };
