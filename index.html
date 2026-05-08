@@ -39,6 +39,7 @@
           <div class="hero-actions" aria-label="Ações principais">
             <a class="button primary" href="#contato" data-content="hero.primaryCta">Falar com RI</a>
             <a class="button secondary" href="#tese" data-content="hero.secondaryCta">Conhecer a tese</a>
+            <a class="button dataroom-button" href="https://dataroom-gauchatecpar.nuvolahost.com.br/investidor" target="_blank" rel="noreferrer" data-content="dataroom.cta">Entrar no dataroom</a>
           </div>
         </div>
       </section>
@@ -58,6 +59,17 @@
         </div>
       </section>
 
+      <section class="dataroom-callout" aria-label="Dataroom Gaúcha TecPar">
+        <div>
+          <p class="section-label" data-content="dataroom.label">Dataroom Gaúcha TecPar</p>
+          <h2 data-content="dataroom.title">Acesse o ambiente do investidor</h2>
+          <p data-content="dataroom.copy">
+            Documentos, informações institucionais e materiais de acompanhamento ficam reunidos em um ambiente reservado para investidores qualificados.
+          </p>
+        </div>
+        <a class="button primary" href="https://dataroom-gauchatecpar.nuvolahost.com.br/investidor" target="_blank" rel="noreferrer" data-content="dataroom.cta">Entrar no dataroom</a>
+      </section>
+
       <section id="quem-somos" class="section split-section">
         <div class="section-copy">
           <p class="section-label" data-content="about.label">Quem somos</p>
@@ -70,8 +82,8 @@
           </p>
         </div>
         <figure class="media-panel">
-          <img src="assets/fachada-gauchatecpar.jpg" alt="Fachada do endereço institucional da Gaúcha TecPar">
-          <figcaption data-content="about.caption">Av. Carlos Gomes, Porto Alegre</figcaption>
+          <img src="assets/gauchatecpar-sede-digital.jpg" alt="Imagem institucional da nova presença da Gaúcha TecPar">
+          <figcaption data-content="about.caption">Nova imagem institucional da Gaúcha TecPar</figcaption>
         </figure>
       </section>
 
@@ -139,7 +151,7 @@
 
         <div class="evidence-layout">
           <figure class="dashboard-frame">
-            <img src="assets/dashboard-2t25-brasil.png" alt="Dashboard de resultados da Brasil TecPar no segundo trimestre de 2025">
+            <img src="assets/dashboard-brasiltecpar-legivel.png" alt="Dashboard legível de resultados da Brasil TecPar no segundo trimestre de 2025">
           </figure>
           <div class="evidence-copy">
             <h3 data-content="brasil.evidenceTitle">Governança, escala e disciplina de execução</h3>
@@ -233,13 +245,17 @@
             <a href="https://wa.me/5551992945031" target="_blank" rel="noreferrer" data-content="contact.whatsappRi">WhatsApp RI: (51) 9 9294-5031</a>
             <a href="https://wa.me/5551991416447" target="_blank" rel="noreferrer" data-content="contact.whatsappFinance">WhatsApp Financeiro: (51) 9 9141-6447</a>
             <address data-content="contact.address" data-content-format="lines">
-              Av. Carlos Gomes, 222 - 8º andar - Conj. 1113<br>
+              Av. Carlos Gomes, 222 - Conj. 1113<br>
               Bairro Boa Vista, Porto Alegre - RS, CEP 90480-000
             </address>
           </div>
         </div>
 
-        <form class="contact-form" data-contact-form>
+        <form class="contact-form" action="/send-contact" method="post" data-contact-form>
+          <label class="hidden-field" aria-hidden="true">
+            Empresa
+            <input name="empresa" tabindex="-1" autocomplete="off">
+          </label>
           <label>
             Nome
             <input name="nome" autocomplete="name" required>
@@ -257,7 +273,7 @@
             <textarea name="mensagem" rows="5" required></textarea>
           </label>
           <button class="button primary" type="submit" data-content="contact.formButton">Enviar mensagem</button>
-          <p class="form-note" data-form-note data-content="contact.formNote">O envio abre seu cliente de email com a mensagem preenchida.</p>
+          <p class="form-note" data-form-note data-content="contact.formNote">O envio é feito com segurança pelo site.</p>
         </form>
       </section>
     </main>

@@ -1,0 +1,5 @@
+config/mail.php
+config/mail.js
+screenshot-*.png
+*.zip
+local-preview-server.js

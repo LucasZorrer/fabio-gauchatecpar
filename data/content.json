@@ -4,59 +4,69 @@
     "description": "Gaúcha TecPar: holding de participação em telecom e infraestrutura digital, com foco atual na Brasil TecPar."
   },
   "hero": {
-    "eyebrow": "Investimentos em TI e Telecom",
+    "eyebrow": "Holding de infraestrutura digital",
     "title": "Gaúcha TecPar",
-    "copy": "Holding de participação em telecom e infraestrutura digital. Hoje, seu foco de investimento está na Brasil TecPar, plataforma nacional de conectividade, data centers, telefonia e entretenimento.",
+    "copy": "Holding de participações em telecom e infraestrutura digital, com 30 anos de história e atuação concentrada na Brasil TecPar — operadora nacional de fibra óptica com mais de 1,3 milhão de acessos, presença em 384 cidades e participação institucional da Macquarie Capital.",
     "primaryCta": "Falar com RI",
     "secondaryCta": "Conhecer a tese"
   },
   "signals": {
     "origin": {
       "label": "Origem",
-      "value": "Porto Alegre, RS"
+      "value": "São Borja, RS"
     },
     "strategy": {
-      "label": "Estratégia",
-      "value": "Telecom e infraestrutura digital"
+      "label": "Atuação",
+      "value": "9 estados + DF, 384 cidades"
     },
     "investment": {
       "label": "Investimento atual",
       "value": "Brasil TecPar"
     }
   },
+  "dataroom": {
+    "label": "Dataroom Gaúcha TecPar",
+    "title": "Acesse o ambiente do investidor",
+    "copy": "Documentos, informações institucionais e materiais de acompanhamento ficam reunidos em um ambiente reservado para investidores qualificados.",
+    "cta": "Entrar no dataroom"
+  },
   "about": {
     "label": "Quem somos",
-    "title": "A holding que deu origem à Brasil TecPar",
-    "copy1": "A Gaúcha TecPar foi a semente que deu origem à Brasil TecPar. Com base sólida no setor de Internet e Telecom, a holding direciona hoje seus investimentos exclusivamente para a Brasil TecPar, consolidando sua presença nacional em soluções de conectividade, data centers, telefonia e entretenimento.",
-    "copy2": "A estratégia combina visão empreendedora, disciplina de consolidação e exposição a um mercado essencial para residências, empresas e comunidades.",
-    "caption": "Av. Carlos Gomes, Porto Alegre"
+    "title": "Holding controladora da Brasil TecPar",
+    "copy1": "Fundada em 1995, a Gaúcha TecPar é a holding que originou e controla a Brasil TecPar. Em três décadas no setor de Internet e Telecom, conduziu o ciclo que transformou um provedor regional do Sul em uma operadora nacional de fibra óptica, com presença em 9 estados e no Distrito Federal.",
+    "copy2": "A holding mantém o bloco de controle alinhado à gestão da plataforma e direciona seus investimentos integralmente à Brasil TecPar, com foco em consolidação setorial, integração de aquisições e fortalecimento institucional.",
+    "caption": "Nova imagem institucional da Gaúcha TecPar"
   },
   "thesis": {
     "label": "Tese",
-    "title": "Participar da consolidação de um setor essencial",
-    "copy": "Banda larga, fibra óptica, serviços digitais e infraestrutura de dados formam uma das camadas críticas da economia moderna. A Gaúcha TecPar organiza sua atuação para capturar esse crescimento por meio de uma plataforma operacional em escala.",
+    "title": "Capital paciente em infraestrutura crítica",
+    "copy": "Fibra óptica é o ativo de base da economia digital — receita recorrente, demanda inelástica e barreira de entrada física. A Gaúcha TecPar concentra capital em uma plataforma de consolidação que combina trinta anos de execução, validação institucional e disciplina de governança.",
     "cards": [
       {
-        "title": "Mercado fragmentado",
-        "copy": "O setor brasileiro de ISPs segue pulverizado, criando espaço para consolidação por plataformas com capital, governança e capacidade de integração."
+        "title": "Ativo real e receita recorrente",
+        "copy": "Cabos, redes e clientes conectados são infraestrutura física com mensalidade recorrente e inadimplência estruturalmente baixa. Demanda inelástica em residências, empresas, saúde, educação e governo."
       },
       {
-        "title": "Receita recorrente",
-        "copy": "Conectividade é serviço de uso contínuo, com demanda estrutural em residências, empresas, saúde, educação e governo."
+        "title": "Janela de consolidação",
+        "copy": "De 2012 a 2024, a participação dos ISPs independentes no mercado de banda larga saltou de 16% para mais de 55%. O ciclo natural de consolidação seleciona os players com escala, capital e governança — e ainda há janela."
       },
       {
-        "title": "Escala operacional",
-        "copy": "A Brasil TecPar reúne marcas, rede, clientes e capacidade de execução para crescer em presença nacional e eficiência."
+        "title": "Execução validada",
+        "copy": "30 anos de operação, 57+ aquisições integradas, auditoria KPMG, Cia Aberta CVM Categoria B e participação institucional da Macquarie Capital — gestor global com US$ 655 bilhões sob gestão."
       }
     ]
   },
   "brasil": {
     "label": "Brasil TecPar",
-    "title": "A plataforma de investimento da Gaúcha TecPar",
-    "copy": "A Brasil TecPar atua com a premissa de crescer de forma sustentável, gerar valor para acionistas e contribuir para as comunidades onde está presente.",
+    "title": "A plataforma operacional da Gaúcha TecPar",
+    "copy": "Operadora nacional de fibra óptica registrada na CVM como Companhia Aberta Categoria B, auditada pela KPMG. Combina crescimento por aquisições, integração disciplinada de redes e expansão da base de clientes em segmentos residencial e B2B.",
     "metrics": [
       {
-        "label": "Receita líquida 2025",
+        "label": "Receita Bruta 2025",
+        "value": "R$ 1,98 bi"
+      },
+      {
+        "label": "Receita Líquida 2025",
         "value": "R$ 1,754 bi"
       },
       {
@@ -64,16 +74,12 @@
         "value": "R$ 856,9 mi"
       },
       {
-        "label": "Acessos banda larga",
+        "label": "Acessos banda larga (4T25)",
         "value": "1,345 mi"
-      },
-      {
-        "label": "Cidades atendidas",
-        "value": "384"
       }
     ],
-    "evidenceTitle": "Governança, escala e disciplina de execução",
-    "evidenceCopy": "A tese se apoia em uma combinação de crescimento orgânico, integração de aquisições e fortalecimento institucional. O foco é preservar uma trajetória de expansão sustentável em um segmento de infraestrutura essencial.",
+    "evidenceTitle": "Validação institucional e disciplina de capital",
+    "evidenceCopy": "Em 2025, a Receita Bruta cresceu 62% e o EBITDA ajustado avançou 68%, com margem EBITDA de 48,8% e CAPEX equivalente a 17,6% da receita. As demonstrações financeiras são auditadas pela KPMG; as debêntures recebem rating AA- na escala global da S&P. A Macquarie Capital — gestor global de infraestrutura com US$ 655 bilhões sob gestão — figura como sócio institucional da plataforma desde março de 2025.",
     "evidenceLink": "Ver relatórios da Brasil TecPar"
   },
   "investors": {
@@ -91,7 +97,7 @@
       },
       {
         "title": "Materiais sob confidencialidade",
-        "copy": "Documentos restritos são compartilhados apenas quando aplicável e mediante procedimento próprio."
+        "copy": "Documentos restritos são compartilhados mediante NDA e somente após etapas de qualificação."
       },
       {
         "title": "Reunião com RI",
@@ -106,13 +112,13 @@
       {
         "date": "Março de 2026",
         "title": "Brasil TecPar reporta lucro líquido em 2025",
-        "copy": "Resultado anual refletiu expansão por aquisições e crescimento da base de assinantes.",
+        "copy": "Lucro líquido de R$ 72,2 milhões (+574,5% YoY), com EBITDA ajustado de R$ 856,9 milhões (+68%) e margem de 48,8%.",
         "linkText": "Ler notícia"
       },
       {
         "date": "Fevereiro de 2026",
-        "title": "Aquisição da operação de banda larga da Ligga",
-        "copy": "Operação anunciada para fortalecer presença e escala no segmento de fibra óptica.",
+        "title": "Contrato para incorporação da operação de fibra da Ligga",
+        "copy": "Contrato assinado em 20/02/2026, sujeito a aprovação regulatória pelo CADE e pela ANATEL. Quando concluída, a operação consolida ~400 mil clientes adicionais no Paraná.",
         "linkText": "Ler notícia"
       },
       {
@@ -130,9 +136,9 @@
     "email": "ri@gauchatecpar.com.br",
     "whatsappRi": "WhatsApp RI: (51) 9 9294-5031",
     "whatsappFinance": "WhatsApp Financeiro: (51) 9 9141-6447",
-    "address": "Av. Carlos Gomes, 222 - 8º andar - Conj. 1113\nBairro Boa Vista, Porto Alegre - RS, CEP 90480-000",
+    "address": "Av. Carlos Gomes, 222 - Conj. 1113\r\nBairro Boa Vista, Porto Alegre - RS, CEP 90480-000",
     "formButton": "Enviar mensagem",
-    "formNote": "O envio abre seu cliente de email com a mensagem preenchida."
+    "formNote": "O envio é feito com segurança pelo site."
   },
   "footer": {
     "brand": "Gaúcha TecPar",

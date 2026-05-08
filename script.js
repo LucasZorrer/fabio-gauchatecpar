@@ -1,8 +1,9 @@
 const header = document.querySelector("[data-header]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const nav = document.querySelector("[data-nav]");
-const form = document.querySelector("[data-contact-form]");
+const contactForm = document.querySelector("[data-contact-form]");
 const formNote = document.querySelector("[data-form-note]");
+const initialContactStatus = new URLSearchParams(window.location.search).get("contato");
 let contactRecipient = "ri@gauchatecpar.com.br";
 
 const getContentValue = (content, path) => {
@@ -19,6 +20,26 @@ const escapeHtml = (value) => {
   const div = document.createElement("div");
   div.textContent = value;
   return div.innerHTML;
+};
+
+const setFormMessage = (message, type = "") => {
+  if (!formNote) {
+    return;
+  }
+
+  formNote.textContent = message;
+  formNote.classList.toggle("is-success", type === "success");
+  formNote.classList.toggle("is-error", type === "error");
+};
+
+const applyInitialContactStatus = () => {
+  if (initialContactStatus === "enviado") {
+    setFormMessage("Mensagem enviada com sucesso.", "success");
+  }
+
+  if (initialContactStatus === "erro") {
+    setFormMessage("Não foi possível enviar agora. Tente novamente ou use os contatos diretos ao lado.", "error");
+  }
 };
 
 const applySiteContent = (content) => {
@@ -67,7 +88,8 @@ fetch("data/content.json", { cache: "no-store" })
   })
   .catch(() => {
     // Keep the HTML fallback content when the JSON is unavailable locally.
-  });
+  })
+  .finally(applyInitialContactStatus);
 
 menuToggle?.addEventListener("click", () => {
   const isOpen = nav.classList.toggle("is-open");
@@ -89,23 +111,44 @@ window.addEventListener("scroll", () => {
   header?.classList.toggle("is-scrolled", window.scrollY > 20);
 });
 
-form?.addEventListener("submit", (event) => {
+contactForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  const data = new FormData(form);
-  const nome = data.get("nome")?.toString().trim() || "";
-  const email = data.get("email")?.toString().trim() || "";
-  const telefone = data.get("telefone")?.toString().trim() || "";
-  const mensagem = data.get("mensagem")?.toString().trim() || "";
+  const submitButton = contactForm.querySelector('button[type="submit"]');
+  const defaultButtonText = submitButton?.textContent || "Enviar mensagem";
+  const formData = new FormData(contactForm);
+  const payload = new URLSearchParams(formData);
 
-  const subject = encodeURIComponent(`Contato pelo site - ${nome}`);
-  const body = encodeURIComponent(
-    `Nome: ${nome}\nEmail: ${email}\nTelefone: ${telefone}\n\nMensagem:\n${mensagem}`
-  );
+  setFormMessage("Enviando mensagem...");
 
-  window.location.href = `mailto:${contactRecipient}?subject=${subject}&body=${body}`;
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = "Enviando...";
+  }
 
-  if (formNote) {
-    formNote.textContent = "Mensagem preparada no seu cliente de email.";
+  try {
+    const response = await fetch(contactForm.action, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      },
+      body: payload.toString(),
+    });
+    const result = await response.json().catch(() => null);
+
+    if (!response.ok || !result?.ok) {
+      throw new Error("Contact request failed.");
+    }
+
+    contactForm.reset();
+    setFormMessage("Mensagem enviada com sucesso.", "success");
+  } catch (error) {
+    setFormMessage("Não foi possível enviar agora. Tente novamente ou use os contatos diretos ao lado.", "error");
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = defaultButtonText;
+    }
   }
 });

@@ -187,6 +187,18 @@ a {
   border-color: rgba(255, 255, 255, 0.78);
 }
 
+.button.dataroom-button {
+  border-color: rgba(199, 161, 74, 0.42);
+  background: rgba(199, 161, 74, 0.16);
+  color: #ffe6a8;
+}
+
+.button.dataroom-button:hover,
+.button.dataroom-button:focus-visible {
+  border-color: rgba(255, 230, 168, 0.82);
+  background: rgba(199, 161, 74, 0.26);
+}
+
 .signal-bar {
   width: min(1120px, calc(100% - 48px));
   margin: -28px auto 0;
@@ -222,6 +234,41 @@ a {
   margin-top: 8px;
   font-size: 20px;
   line-height: 1.25;
+}
+
+.dataroom-callout {
+  width: min(1120px, calc(100% - 48px));
+  margin: 34px auto 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: center;
+  padding: 34px;
+  border: 1px solid rgba(47, 157, 117, 0.32);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(16, 47, 85, 0.96), rgba(10, 22, 40, 0.96)),
+    url("assets/datacenter-hero.jpg") center / cover no-repeat;
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.dataroom-callout h2 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.15;
+}
+
+.dataroom-callout p:not(.section-label) {
+  max-width: 680px;
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.dataroom-callout .button {
+  min-width: 190px;
 }
 
 .section {
@@ -504,6 +551,14 @@ a {
   box-shadow: var(--shadow);
 }
 
+.hidden-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .contact-form label {
   display: grid;
   gap: 8px;
@@ -533,12 +588,25 @@ a {
   width: 100%;
 }
 
+.contact-form .button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
 .form-note {
   min-height: 24px;
   margin: 0;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.4;
+}
+
+.form-note.is-success {
+  color: #186c4e;
+}
+
+.form-note.is-error {
+  color: #a3372a;
 }
 
 .site-footer {
@@ -642,11 +710,17 @@ a {
 
   .split-section,
   .evidence-layout,
+  .dataroom-callout,
   .contact-section {
     grid-template-columns: 1fr;
   }
 
+  .dataroom-callout .button {
+    width: 100%;
+  }
+
   .signal-bar,
+  .dataroom-callout,
   .thesis-grid,
   .metric-grid,
   .journey-list,
@@ -709,6 +783,7 @@ a {
   }
 
   .signal-bar,
+  .dataroom-callout,
   .section,
   .thesis-section > *,
   .updates-section > *,
