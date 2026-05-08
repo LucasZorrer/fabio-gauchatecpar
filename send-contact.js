@@ -6,7 +6,52 @@ const tls = require("tls");
 const MAX_BODY_SIZE = 64 * 1024;
 const DEFAULT_SUCCESS_URL = "/?contato=enviado#contato";
 const DEFAULT_ERROR_URL = "/?contato=erro#contato";
+const LOCAL_ENV_FILE = path.join(__dirname, ".env");
 const LOCAL_MAIL_CONFIG = path.join(__dirname, "config", "mail.js");
+
+function parseEnvLine(line) {
+  const match = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
+
+  if (!match) {
+    return null;
+  }
+
+  const key = match[1];
+  let value = match[2];
+
+  if (
+    (value.startsWith('"') && value.endsWith('"')) ||
+    (value.startsWith("'") && value.endsWith("'"))
+  ) {
+    value = value.slice(1, -1);
+  }
+
+  return [key, value];
+}
+
+function loadDotEnvFile() {
+  if (!fs.existsSync(LOCAL_ENV_FILE)) {
+    return;
+  }
+
+  fs.readFileSync(LOCAL_ENV_FILE, "utf8")
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith("#"))
+    .forEach((line) => {
+      const parsed = parseEnvLine(line);
+
+      if (!parsed) {
+        return;
+      }
+
+      const [key, value] = parsed;
+
+      if (process.env[key] === undefined) {
+        process.env[key] = value;
+      }
+    });
+}
 
 function mailConfigFromEnv() {
   const config = {
@@ -39,6 +84,8 @@ function mailConfigFromEnv() {
 }
 
 function loadMailConfig() {
+  loadDotEnvFile();
+
   const envConfig = mailConfigFromEnv();
 
   if (envConfig) {

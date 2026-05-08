@@ -1,3 +1,4 @@
+/.env
 config/mail.php
 config/mail.js
 screenshot-*.png
