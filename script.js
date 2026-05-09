@@ -22,6 +22,8 @@ const escapeHtml = (value) => {
   return div.innerHTML;
 };
 
+const looksLikeUrl = (value) => /^https?:\/\//i.test(String(value || "").trim());
+
 const setFormMessage = (message, type = "") => {
   if (!formNote) {
     return;
@@ -67,6 +69,15 @@ const applySiteContent = (content) => {
 
       if (path && attribute && typeof value === "string") {
         element.setAttribute(attribute, value);
+        return;
+      }
+
+      if (path.endsWith(".link") && attribute === "href") {
+        const linkText = getContentValue(content, path.replace(/\.link$/, ".linkText"));
+
+        if (looksLikeUrl(linkText)) {
+          element.setAttribute("href", linkText.trim());
+        }
       }
     });
   });

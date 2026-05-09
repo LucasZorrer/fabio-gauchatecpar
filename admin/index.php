@@ -9,6 +9,73 @@ $contentFile = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPAR
 $message = '';
 $error = '';
 
+function defaultUpdateLinks(): array
+{
+    return [
+        0 => 'https://teletime.com.br/06/03/2026/puxada-por-aquisicoes-brasil-tecpar-tem-lucro-de-r-72-milhoes-em-2025/',
+        1 => 'https://teletime.com.br/20/02/2026/brasil-tecpar-compra-operacao-de-banda-larga-da-ligga/',
+        2 => 'https://www.brasiltecpar.com.br/post/brasil-tecpar-conclui-aquisic-a-o-da-sempre-internet-e-ultrapassa-1-2-milha-o-de-clientes-conectados',
+    ];
+}
+
+function looksLikeUrl(string $value): bool
+{
+    return preg_match('/^https?:\/\//i', trim($value)) === 1;
+}
+
+function ensureContentDefaults(array $data): array
+{
+    $defaultLinks = defaultUpdateLinks();
+
+    if (!isset($data['updates']['items']) || !is_array($data['updates']['items'])) {
+        return $data;
+    }
+
+    foreach ($data['updates']['items'] as $index => $item) {
+        if (!is_array($item)) {
+            continue;
+        }
+
+        if (!isset($item['link']) || trim((string) $item['link']) === '') {
+            $linkText = (string) ($item['linkText'] ?? '');
+            $item['link'] = looksLikeUrl($linkText) ? trim($linkText) : ($defaultLinks[$index] ?? '');
+        }
+
+        $data['updates']['items'][$index] = $item;
+    }
+
+    return $data;
+}
+
+function sendBackup(string $contentFile): void
+{
+    if (!is_file($contentFile)) {
+        http_response_code(404);
+        echo 'Arquivo de conteudo nao encontrado.';
+        exit;
+    }
+
+    $filename = 'backup-gauchatecpar-' . date('Ymd-His') . '.json';
+
+    header('Content-Type: application/json; charset=utf-8');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    header('Content-Length: ' . (string) filesize($contentFile));
+    header('Cache-Control: no-store');
+    readfile($contentFile);
+    exit;
+}
+
+function saveContentFile(string $contentFile, array $content): bool
+{
+    $encoded = json_encode($content, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+    if ($encoded === false) {
+        return false;
+    }
+
+    return file_put_contents($contentFile, $encoded . PHP_EOL, LOCK_EX) !== false;
+}
+
 function flattenContent(array $data, string $prefix = ''): array
 {
     $fields = [];
@@ -107,6 +174,19 @@ function fieldLabel(string $path): string
         return $map[$path];
     }
 
+    if (preg_match('/^updates\.items\.(\d+)\.(date|title|copy|linkText|link)$/', $path, $matches) === 1) {
+        $number = ((int) $matches[1]) + 1;
+        $labels = [
+            'date' => 'Noticia ' . $number . ' - data',
+            'title' => 'Noticia ' . $number . ' - titulo',
+            'copy' => 'Noticia ' . $number . ' - texto',
+            'linkText' => 'Noticia ' . $number . ' - texto do botao',
+            'link' => 'Noticia ' . $number . ' - link',
+        ];
+
+        return $labels[$matches[2]];
+    }
+
     $label = str_replace(['.', '_'], ' ', $path);
     return ucwords($label);
 }
@@ -132,6 +212,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
 
 $isAuthenticated = !empty($_SESSION['authenticated']);
 
+if ($isAuthenticated && isset($_GET['backup'])) {
+    sendBackup($contentFile);
+}
+
 if (!file_exists($contentFile)) {
     $error = 'Arquivo data/content.json não encontrado.';
     $content = [];
@@ -142,6 +226,29 @@ if (!file_exists($contentFile)) {
     if (!is_array($content)) {
         $content = [];
         $error = 'Arquivo data/content.json inválido.';
+    }
+    if (is_array($content)) {
+        $content = ensureContentDefaults($content);
+    }
+}
+
+if ($isAuthenticated && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['restore_backup'])) {
+    $uploadedFile = $_FILES['backup_file'] ?? null;
+
+    if (!is_array($uploadedFile) || ($uploadedFile['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
+        $error = 'Nao foi possivel ler o arquivo de backup enviado.';
+    } else {
+        $json = file_get_contents((string) $uploadedFile['tmp_name']);
+        $restored = json_decode((string) $json, true);
+
+        if (!is_array($restored)) {
+            $error = 'Backup invalido. Envie um arquivo JSON exportado pelo admin.';
+        } elseif (!saveContentFile($contentFile, $restored)) {
+            $error = 'Nao foi possivel restaurar. Verifique permissao de escrita em data/content.json.';
+        } else {
+            $content = ensureContentDefaults($restored);
+            $message = 'Backup restaurado com sucesso.';
+        }
     }
 }
 
@@ -269,6 +376,49 @@ $fields = flattenContent($content);
         cursor: pointer;
       }
 
+      .button-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        border-radius: 8px;
+        padding: 12px 20px;
+        background: var(--navy);
+        color: var(--white);
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .tool-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 18px;
+        background: #fbfcfc;
+      }
+
+      .tool-card h2 {
+        margin: 0 0 8px;
+        color: var(--navy);
+        font-size: 18px;
+      }
+
+      .tool-card p {
+        margin: 0 0 14px;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      input[type="file"] {
+        padding: 10px;
+        background: var(--white);
+      }
+
       .notice {
         border-radius: 8px;
         padding: 14px 16px;
@@ -306,6 +456,10 @@ $fields = flattenContent($content);
         .panel {
           padding: 20px;
         }
+
+        .tools-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -340,6 +494,28 @@ $fields = flattenContent($content);
           </form>
         </section>
       <?php else: ?>
+        <section class="panel">
+          <div class="tools-grid">
+            <div class="tool-card">
+              <h2>Backup</h2>
+              <p>Baixe uma copia completa dos textos e numeros atuais antes de alterar o site.</p>
+              <a class="button-link" href="?backup=1">Baixar backup</a>
+            </div>
+            <div class="tool-card">
+              <h2>Restauro</h2>
+              <p>Envie um arquivo JSON de backup para restaurar os textos e numeros do site.</p>
+              <form method="post" enctype="multipart/form-data">
+                <input type="hidden" name="restore_backup" value="1">
+                <label>
+                  Arquivo de backup
+                  <input type="file" name="backup_file" accept="application/json,.json" required>
+                </label>
+                <button type="submit">Restaurar backup</button>
+              </form>
+            </div>
+          </div>
+        </section>
+
         <form method="post">
           <section class="panel">
             <?php foreach ($fields as $path => $value): ?>

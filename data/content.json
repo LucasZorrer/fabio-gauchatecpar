@@ -113,19 +113,22 @@
         "date": "Março de 2026",
         "title": "Brasil TecPar reporta lucro líquido em 2025",
         "copy": "Lucro líquido de R$ 72,2 milhões (+574,5% YoY), com EBITDA ajustado de R$ 856,9 milhões (+68%) e margem de 48,8%.",
-        "linkText": "Ler notícia"
+        "linkText": "Ler notícia",
+        "link": "https://teletime.com.br/06/03/2026/puxada-por-aquisicoes-brasil-tecpar-tem-lucro-de-r-72-milhoes-em-2025/"
       },
       {
         "date": "Fevereiro de 2026",
         "title": "Contrato para incorporação da operação de fibra da Ligga",
         "copy": "Contrato assinado em 20/02/2026, sujeito a aprovação regulatória pelo CADE e pela ANATEL. Quando concluída, a operação consolida ~400 mil clientes adicionais no Paraná.",
-        "linkText": "Ler notícia"
+        "linkText": "Ler notícia",
+        "link": "https://teletime.com.br/20/02/2026/brasil-tecpar-compra-operacao-de-banda-larga-da-ligga/"
       },
       {
         "date": "Maio de 2025",
         "title": "Mais de 1 milhão de clientes conectados",
         "copy": "A integração da Sempre Internet ampliou presença e base operacional da Brasil TecPar.",
-        "linkText": "Ler atualização"
+        "linkText": "Ler atualização",
+        "link": "https://www.brasiltecpar.com.br/post/brasil-tecpar-conclui-aquisic-a-o-da-sempre-internet-e-ultrapassa-1-2-milha-o-de-clientes-conectados"
       }
     ]
   },
