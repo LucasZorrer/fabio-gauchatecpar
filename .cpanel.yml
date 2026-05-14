@@ -1,0 +1,17 @@
+---
+deployment:
+  tasks:
+    # Caminho de destino dentro do servidor NuvolaHost.
+    # Usuário cPanel: gauchate
+    - export DEPLOYPATH=/home/gauchate/public_html/
+
+    # --- Arquivos da raiz do site ---
+    - /bin/cp index.html                    $DEPLOYPATH
+    - /bin/cp styles.css                    $DEPLOYPATH
+    - /bin/cp script.js                     $DEPLOYPATH
+    - /bin/cp send-contact.js               $DEPLOYPATH
+    - /bin/cp politica-de-privacidade.html  $DEPLOYPATH
+    - /bin/cp termos-de-uso.html            $DEPLOYPATH
+
+    # --- Pastas (cópia recursiva) ---
+    - /bin/cp -R assets                     $DEPLOYPATH
