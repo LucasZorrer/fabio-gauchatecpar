@@ -14,4 +14,4 @@ deployment:
     - /bin/cp termos-de-uso.html            $DEPLOYPATH
 
     # --- Pastas (cópia recursiva) ---
-    - /bin/cp -R assets                     $DEPLOYPATH
+    - /bin/cp -R assets                 
