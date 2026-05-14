@@ -465,7 +465,7 @@ $fields = flattenContent($content);
   </head>
   <body>
     <header class="admin-header">
-      <h1>Admin Gaúcha TecPar.</h1>
+      <h1>Admin Gaúcha TecPar</h1>
       <div>
         <a href="../" target="_blank" rel="noreferrer">Ver site</a>
         <?php if ($isAuthenticated): ?>
