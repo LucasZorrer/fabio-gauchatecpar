@@ -17,4 +17,10 @@ deployment:
     - /bin/cp -R assets                     $DEPLOYPATH
     - /bin/cp -R config                     $DEPLOYPATH
     - /bin/cp -R admin                      $DEPLOYPATH
-    - /bin/cp -R data                       $DEPLOYPATH
+
+    # --- Conteudo editado pelo /admin ---
+    # O arquivo data/content.json e a fonte da verdade do admin no servidor.
+    # Copiamos apenas na primeira instalacao; depois disso, deploys nao
+    # sobrescrevem os textos/numeros alterados pelo painel.
+    - /bin/mkdir -p                         $DEPLOYPATH/data
+    - if [ ! -f "$DEPLOYPATH/data/content.json" ]; then /bin/cp data/content.json "$DEPLOYPATH/data/content.json"; fi
