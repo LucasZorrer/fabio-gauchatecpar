@@ -27,6 +27,14 @@ function ensureContentDefaults(array $data): array
 {
     $defaultLinks = defaultUpdateLinks();
 
+    if (!isset($data['brasil']) || !is_array($data['brasil'])) {
+        $data['brasil'] = [];
+    }
+
+    if (!isset($data['brasil']['evidenceUrl']) || trim((string) $data['brasil']['evidenceUrl']) === '') {
+        $data['brasil']['evidenceUrl'] = 'https://www.brasiltecpar.com.br/relatoriosanuais';
+    }
+
     if (!isset($data['updates']['items']) || !is_array($data['updates']['items'])) {
         return $data;
     }
@@ -149,7 +157,8 @@ function fieldLabel(string $path): string
         'brasil.copy' => 'Seção Brasil TecPar - texto',
         'brasil.evidenceTitle' => 'Bloco evidência - título',
         'brasil.evidenceCopy' => 'Bloco evidência - texto',
-        'brasil.evidenceLink' => 'Bloco evidência - link',
+        'brasil.evidenceLink' => 'Bloco evidência - texto do link',
+        'brasil.evidenceUrl' => 'Bloco evidência - URL do link',
         'investors.label' => 'Seção investidores - rótulo',
         'investors.title' => 'Seção investidores - título',
         'investors.copy' => 'Seção investidores - texto',
