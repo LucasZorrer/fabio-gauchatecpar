@@ -474,9 +474,13 @@ a {
 }
 
 .person-card img {
-  width: 100%;
+  width: min(calc(100% - 44px), 220px);
   aspect-ratio: 4 / 5;
+  align-self: center;
+  margin-top: 22px;
   object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 8px;
   background: var(--mist);
 }
 
