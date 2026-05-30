@@ -6,14 +6,28 @@ const formNote = document.querySelector("[data-form-note]");
 const initialContactStatus = new URLSearchParams(window.location.search).get("contato");
 let contactRecipient = "ri@gauchatecpar.com.br";
 
-const getContentValue = (content, path) => {
-  return path.split(".").reduce((current, key) => {
+const getSingleContentValue = (content, path) => {
+  return path.trim().split(".").reduce((current, key) => {
     if (current === undefined || current === null) {
       return undefined;
     }
 
     return current[key];
   }, content);
+};
+
+const getContentValue = (content, path) => {
+  const paths = String(path || "").split("|");
+
+  for (const candidate of paths) {
+    const value = getSingleContentValue(content, candidate);
+
+    if (typeof value === "string" && value.trim() !== "") {
+      return value;
+    }
+  }
+
+  return getSingleContentValue(content, paths[0] || "");
 };
 
 const escapeHtml = (value) => {

@@ -26,52 +26,68 @@ function defaultTeamContent(): array
         'label' => 'Equipe',
         'title' => 'Diretoria e Conselho de Administração',
         'copy' => 'Conheça a liderança responsável pela governança, estratégia e disciplina financeira da companhia.',
-        'executiveTitle' => 'Diretoria',
-        'boardTitle' => 'Conselho de Administração',
         'executives' => [
-            [
-                'photo' => $placeholder,
-                'name' => 'Nome do Diretor Presidente',
-                'role' => 'Diretor Presidente',
-                'caption' => 'Liderança executiva',
-                'description' => 'Inclua aqui uma breve descrição sobre trajetória, responsabilidades e foco de atuação.',
-            ],
-            [
-                'photo' => $placeholder,
-                'name' => 'Nome do Diretor Vice-Presidente e RI',
-                'role' => 'Diretor Vice-Presidente e RI',
-                'caption' => 'Relações com investidores',
-                'description' => 'Inclua aqui uma breve descrição sobre trajetória, responsabilidades e foco de atuação.',
-            ],
-            [
-                'photo' => $placeholder,
-                'name' => 'Nome do Diretor Financeiro',
-                'role' => 'Diretor Financeiro',
-                'caption' => 'Gestão financeira',
-                'description' => 'Inclua aqui uma breve descrição sobre trajetória, responsabilidades e foco de atuação.',
+            'label' => 'Diretoria',
+            'members' => [
+                [
+                    'photo' => $placeholder,
+                    'name' => 'Nome do Diretor Presidente',
+                    'role' => 'Diretor Presidente',
+                    'caption' => 'Liderança executiva',
+                    'bio' => 'Inclua aqui uma breve descrição sobre trajetória, responsabilidades e foco de atuação.',
+                    'linkText' => '',
+                    'link' => '',
+                ],
+                [
+                    'photo' => $placeholder,
+                    'name' => 'Nome do Diretor Vice-Presidente e RI',
+                    'role' => 'Diretor Vice-Presidente e RI',
+                    'caption' => 'Relações com investidores',
+                    'bio' => 'Inclua aqui uma breve descrição sobre trajetória, responsabilidades e foco de atuação.',
+                    'linkText' => '',
+                    'link' => '',
+                ],
+                [
+                    'photo' => $placeholder,
+                    'name' => 'Nome do Diretor Financeiro',
+                    'role' => 'Diretor Financeiro',
+                    'caption' => 'Gestão financeira',
+                    'bio' => 'Inclua aqui uma breve descrição sobre trajetória, responsabilidades e foco de atuação.',
+                    'linkText' => '',
+                    'link' => '',
+                ],
             ],
         ],
         'board' => [
-            [
-                'photo' => $placeholder,
-                'name' => 'Nome do Conselheiro 1',
-                'role' => 'Conselheiro de Administração',
-                'caption' => 'Conselho de Administração',
-                'description' => 'Inclua aqui uma breve descrição sobre experiência e contribuição para a governança.',
-            ],
-            [
-                'photo' => $placeholder,
-                'name' => 'Nome do Conselheiro 2',
-                'role' => 'Conselheiro de Administração',
-                'caption' => 'Conselho de Administração',
-                'description' => 'Inclua aqui uma breve descrição sobre experiência e contribuição para a governança.',
-            ],
-            [
-                'photo' => $placeholder,
-                'name' => 'Nome do Conselheiro 3',
-                'role' => 'Conselheiro de Administração',
-                'caption' => 'Conselho de Administração',
-                'description' => 'Inclua aqui uma breve descrição sobre experiência e contribuição para a governança.',
+            'label' => 'Conselho de Administração',
+            'members' => [
+                [
+                    'photo' => $placeholder,
+                    'name' => 'Nome do Conselheiro 1',
+                    'role' => 'Conselheiro de Administração',
+                    'caption' => 'Conselho de Administração',
+                    'bio' => 'Inclua aqui uma breve descrição sobre experiência e contribuição para a governança.',
+                    'linkText' => '',
+                    'link' => '',
+                ],
+                [
+                    'photo' => $placeholder,
+                    'name' => 'Nome do Conselheiro 2',
+                    'role' => 'Conselheiro de Administração',
+                    'caption' => 'Conselho de Administração',
+                    'bio' => 'Inclua aqui uma breve descrição sobre experiência e contribuição para a governança.',
+                    'linkText' => '',
+                    'link' => '',
+                ],
+                [
+                    'photo' => $placeholder,
+                    'name' => 'Nome do Conselheiro 3',
+                    'role' => 'Conselheiro de Administração',
+                    'caption' => 'Conselho de Administração',
+                    'bio' => 'Inclua aqui uma breve descrição sobre experiência e contribuição para a governança.',
+                    'linkText' => '',
+                    'link' => '',
+                ],
             ],
         ],
     ];
@@ -100,7 +116,7 @@ function looksLikeUrl(string $value): bool
 
 function isTeamPhotoPath(string $path): bool
 {
-    return preg_match('/^team\.(executives|board)\.\d+\.photo$/', $path) === 1;
+    return preg_match('/^team\.(executives|board)\.members\.\d+\.photo$/', $path) === 1;
 }
 
 function adminPreviewSrc(string $value): string
@@ -256,8 +272,8 @@ function fieldLabel(string $path): string
         'team.label' => 'Equipe - rótulo',
         'team.title' => 'Equipe - título',
         'team.copy' => 'Equipe - texto',
-        'team.executiveTitle' => 'Equipe - título da diretoria',
-        'team.boardTitle' => 'Equipe - título do conselho',
+        'team.executives.label' => 'Equipe - título da diretoria',
+        'team.board.label' => 'Equipe - título do conselho',
         'investors.label' => 'Seção investidores - rótulo',
         'investors.title' => 'Seção investidores - título',
         'investors.copy' => 'Seção investidores - texto',
@@ -295,7 +311,7 @@ function fieldLabel(string $path): string
         return $labels[$matches[2]];
     }
 
-    if (preg_match('/^team\.(executives|board)\.(\d+)\.(photo|name|role|caption|description)$/', $path, $matches) === 1) {
+    if (preg_match('/^team\.(executives|board)\.members\.(\d+)\.(photo|name|role|caption|bio|description|linkText|link)$/', $path, $matches) === 1) {
         $group = $matches[1] === 'executives' ? 'Diretoria' : 'Conselho';
         $number = ((int) $matches[2]) + 1;
         $labels = [
@@ -303,7 +319,10 @@ function fieldLabel(string $path): string
             'name' => 'nome',
             'role' => 'cargo',
             'caption' => 'legenda',
+            'bio' => 'descrição',
             'description' => 'descrição',
+            'linkText' => 'texto do link',
+            'link' => 'link',
         ];
 
         return $group . ' ' . $number . ' - ' . $labels[$matches[3]];
