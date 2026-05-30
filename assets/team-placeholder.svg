@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 800" role="img" aria-labelledby="title desc">
+  <title id="title">Foto institucional pendente</title>
+  <desc id="desc">Marcador visual para fotografia de integrante da equipe.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#102f55"/>
+      <stop offset="1" stop-color="#2f9d75"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="800" fill="#e7edf0"/>
+  <rect x="54" y="54" width="532" height="692" rx="28" fill="url(#bg)" opacity=".96"/>
+  <circle cx="320" cy="292" r="118" fill="#ffffff" opacity=".86"/>
+  <path d="M154 620c25-110 92-170 166-170s141 60 166 170" fill="#ffffff" opacity=".86"/>
+  <path d="M114 118h412" stroke="#ffffff" stroke-width="18" stroke-linecap="round" opacity=".28"/>
+  <path d="M114 680h292" stroke="#ffffff" stroke-width="18" stroke-linecap="round" opacity=".28"/>
+</svg>

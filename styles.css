@@ -442,6 +442,81 @@ a {
   border-bottom: 1px solid currentColor;
 }
 
+.leadership-section {
+  padding-top: 86px;
+}
+
+.leadership-group + .leadership-group {
+  margin-top: 52px;
+}
+
+.leadership-group h3 {
+  margin: 0 0 18px;
+  color: var(--navy);
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.person-card {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.person-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--mist);
+}
+
+.person-body {
+  display: grid;
+  gap: 9px;
+  padding: 22px;
+}
+
+.person-body span {
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.person-body h4 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 22px;
+  line-height: 1.22;
+}
+
+.person-caption,
+.person-description {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.58;
+}
+
+.person-caption {
+  color: #24364b;
+  font-weight: 700;
+}
+
+.person-description {
+  color: #425267;
+}
+
 .journey-section {
   padding-top: 80px;
 }
@@ -723,6 +798,7 @@ a {
   .dataroom-callout,
   .thesis-grid,
   .metric-grid,
+  .people-grid,
   .journey-list,
   .updates-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -777,6 +853,7 @@ a {
   .signal-bar,
   .thesis-grid,
   .metric-grid,
+  .people-grid,
   .journey-list,
   .updates-grid {
     grid-template-columns: 1fr;

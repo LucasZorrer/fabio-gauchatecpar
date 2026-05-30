@@ -18,18 +18,112 @@ function defaultUpdateLinks(): array
     ];
 }
 
+function defaultTeamContent(): array
+{
+    $placeholder = 'assets/team-placeholder.svg';
+
+    return [
+        'label' => 'Equipe',
+        'title' => 'Diretoria e Conselho de Administração',
+        'copy' => 'Conheça a liderança responsável pela governança, estratégia e disciplina financeira da companhia.',
+        'executiveTitle' => 'Diretoria',
+        'boardTitle' => 'Conselho de Administração',
+        'executives' => [
+            [
+                'photo' => $placeholder,
+                'name' => 'Nome do Diretor Presidente',
+                'role' => 'Diretor Presidente',
+                'caption' => 'Liderança executiva',
+                'description' => 'Inclua aqui uma breve descrição sobre trajetória, responsabilidades e foco de atuação.',
+            ],
+            [
+                'photo' => $placeholder,
+                'name' => 'Nome do Diretor Vice-Presidente e RI',
+                'role' => 'Diretor Vice-Presidente e RI',
+                'caption' => 'Relações com investidores',
+                'description' => 'Inclua aqui uma breve descrição sobre trajetória, responsabilidades e foco de atuação.',
+            ],
+            [
+                'photo' => $placeholder,
+                'name' => 'Nome do Diretor Financeiro',
+                'role' => 'Diretor Financeiro',
+                'caption' => 'Gestão financeira',
+                'description' => 'Inclua aqui uma breve descrição sobre trajetória, responsabilidades e foco de atuação.',
+            ],
+        ],
+        'board' => [
+            [
+                'photo' => $placeholder,
+                'name' => 'Nome do Conselheiro 1',
+                'role' => 'Conselheiro de Administração',
+                'caption' => 'Conselho de Administração',
+                'description' => 'Inclua aqui uma breve descrição sobre experiência e contribuição para a governança.',
+            ],
+            [
+                'photo' => $placeholder,
+                'name' => 'Nome do Conselheiro 2',
+                'role' => 'Conselheiro de Administração',
+                'caption' => 'Conselho de Administração',
+                'description' => 'Inclua aqui uma breve descrição sobre experiência e contribuição para a governança.',
+            ],
+            [
+                'photo' => $placeholder,
+                'name' => 'Nome do Conselheiro 3',
+                'role' => 'Conselheiro de Administração',
+                'caption' => 'Conselho de Administração',
+                'description' => 'Inclua aqui uma breve descrição sobre experiência e contribuição para a governança.',
+            ],
+        ],
+    ];
+}
+
+function mergeMissingDefaults(array $data, array $defaults): array
+{
+    foreach ($defaults as $key => $value) {
+        if (!array_key_exists($key, $data) || (is_array($value) && !is_array($data[$key]))) {
+            $data[$key] = $value;
+            continue;
+        }
+
+        if (is_array($data[$key]) && is_array($value)) {
+            $data[$key] = mergeMissingDefaults($data[$key], $value);
+        }
+    }
+
+    return $data;
+}
+
 function looksLikeUrl(string $value): bool
 {
     return preg_match('/^https?:\/\//i', trim($value)) === 1;
+}
+
+function isTeamPhotoPath(string $path): bool
+{
+    return preg_match('/^team\.(executives|board)\.\d+\.photo$/', $path) === 1;
+}
+
+function adminPreviewSrc(string $value): string
+{
+    $value = trim($value);
+
+    if ($value === '' || looksLikeUrl($value) || strpos($value, '/') === 0) {
+        return $value;
+    }
+
+    return '../' . ltrim($value, '/');
 }
 
 function ensureContentDefaults(array $data): array
 {
     $defaultLinks = defaultUpdateLinks();
 
-    if (!isset($data['brasil']) || !is_array($data['brasil'])) {
-        $data['brasil'] = [];
-    }
+    $data = mergeMissingDefaults($data, [
+        'brasil' => [
+            'evidenceUrl' => 'https://www.brasiltecpar.com.br/relatoriosanuais',
+        ],
+        'team' => defaultTeamContent(),
+    ]);
 
     if (!isset($data['brasil']['evidenceUrl']) || trim((string) $data['brasil']['evidenceUrl']) === '') {
         $data['brasil']['evidenceUrl'] = 'https://www.brasiltecpar.com.br/relatoriosanuais';
@@ -159,6 +253,11 @@ function fieldLabel(string $path): string
         'brasil.evidenceCopy' => 'Bloco evidência - texto',
         'brasil.evidenceLink' => 'Bloco evidência - texto do link',
         'brasil.evidenceUrl' => 'Bloco evidência - URL do link',
+        'team.label' => 'Equipe - rótulo',
+        'team.title' => 'Equipe - título',
+        'team.copy' => 'Equipe - texto',
+        'team.executiveTitle' => 'Equipe - título da diretoria',
+        'team.boardTitle' => 'Equipe - título do conselho',
         'investors.label' => 'Seção investidores - rótulo',
         'investors.title' => 'Seção investidores - título',
         'investors.copy' => 'Seção investidores - texto',
@@ -194,6 +293,20 @@ function fieldLabel(string $path): string
         ];
 
         return $labels[$matches[2]];
+    }
+
+    if (preg_match('/^team\.(executives|board)\.(\d+)\.(photo|name|role|caption|description)$/', $path, $matches) === 1) {
+        $group = $matches[1] === 'executives' ? 'Diretoria' : 'Conselho';
+        $number = ((int) $matches[2]) + 1;
+        $labels = [
+            'photo' => 'foto',
+            'name' => 'nome',
+            'role' => 'cargo',
+            'caption' => 'legenda',
+            'description' => 'descrição',
+        ];
+
+        return $group . ' ' . $number . ' - ' . $labels[$matches[3]];
     }
 
     $label = str_replace(['.', '_'], ' ', $path);
@@ -263,14 +376,75 @@ if ($isAuthenticated && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['r
 
 if ($isAuthenticated && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['content']) && is_array($_POST['content'])) {
     $updated = $content;
+    $uploadErrors = [];
 
     foreach ($_POST['content'] as $path => $value) {
         setByPath($updated, (string) $path, trim((string) $value));
     }
 
+    $imageUploads = $_FILES['image_uploads'] ?? null;
+
+    if (is_array($imageUploads) && isset($imageUploads['error']) && is_array($imageUploads['error'])) {
+        $teamAssetsDir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'team';
+
+        foreach ($imageUploads['error'] as $path => $uploadError) {
+            $path = (string) $path;
+
+            if (!isTeamPhotoPath($path) || (int) $uploadError === UPLOAD_ERR_NO_FILE) {
+                continue;
+            }
+
+            if ((int) $uploadError !== UPLOAD_ERR_OK) {
+                $uploadErrors[] = 'Falha ao enviar a foto de ' . fieldLabel($path) . '.';
+                continue;
+            }
+
+            $tmpName = (string) ($imageUploads['tmp_name'][$path] ?? '');
+            $fileSize = (int) ($imageUploads['size'][$path] ?? 0);
+
+            if ($fileSize > 5 * 1024 * 1024) {
+                $uploadErrors[] = 'A foto de ' . fieldLabel($path) . ' deve ter no máximo 5 MB.';
+                continue;
+            }
+
+            $imageInfo = @getimagesize($tmpName);
+            $allowedTypes = [
+                IMAGETYPE_JPEG => 'jpg',
+                IMAGETYPE_PNG => 'png',
+            ];
+
+            if (defined('IMAGETYPE_WEBP')) {
+                $allowedTypes[IMAGETYPE_WEBP] = 'webp';
+            }
+
+            if (!is_array($imageInfo) || !isset($allowedTypes[$imageInfo[2]])) {
+                $uploadErrors[] = 'A foto de ' . fieldLabel($path) . ' deve ser JPG, PNG ou WebP.';
+                continue;
+            }
+
+            if (!is_dir($teamAssetsDir) && !mkdir($teamAssetsDir, 0755, true)) {
+                $uploadErrors[] = 'Não foi possível criar a pasta de fotos da equipe.';
+                continue;
+            }
+
+            $safeBase = strtolower((string) preg_replace('/[^a-z0-9]+/i', '-', $path));
+            $fileName = trim($safeBase, '-') . '-' . date('YmdHis') . '.' . $allowedTypes[$imageInfo[2]];
+            $destination = $teamAssetsDir . DIRECTORY_SEPARATOR . $fileName;
+
+            if (!move_uploaded_file($tmpName, $destination)) {
+                $uploadErrors[] = 'Não foi possível salvar a foto de ' . fieldLabel($path) . '.';
+                continue;
+            }
+
+            setByPath($updated, $path, 'assets/team/' . $fileName);
+        }
+    }
+
     $encoded = json_encode($updated, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
-    if ($encoded === false) {
+    if ($uploadErrors !== []) {
+        $error = implode(' ', $uploadErrors);
+    } elseif ($encoded === false) {
         $error = 'Não foi possível preparar os textos para salvar.';
     } elseif (file_put_contents($contentFile, $encoded . PHP_EOL, LOCK_EX) === false) {
         $error = 'Não foi possível salvar. Verifique permissão de escrita em data/content.json.';
@@ -357,6 +531,35 @@ $fields = flattenContent($content);
         color: var(--muted);
         font-size: 12px;
         font-weight: 500;
+      }
+
+      .image-field {
+        display: grid;
+        grid-template-columns: 96px minmax(0, 1fr);
+        gap: 14px;
+        align-items: start;
+      }
+
+      .image-field img {
+        width: 96px;
+        aspect-ratio: 4 / 5;
+        object-fit: cover;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #eef3f4;
+      }
+
+      .image-controls {
+        display: grid;
+        gap: 10px;
+      }
+
+      .help-text {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 1.45;
       }
 
       input,
@@ -469,6 +672,10 @@ $fields = flattenContent($content);
         .tools-grid {
           grid-template-columns: 1fr;
         }
+
+        .image-field {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -525,13 +732,24 @@ $fields = flattenContent($content);
           </div>
         </section>
 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
           <section class="panel">
             <?php foreach ($fields as $path => $value): ?>
               <label>
                 <?= htmlspecialchars(fieldLabel((string) $path), ENT_QUOTES, 'UTF-8') ?>
                 <span class="field-key"><?= htmlspecialchars((string) $path, ENT_QUOTES, 'UTF-8') ?></span>
-                <?php if (strlen((string) $value) > 80 || strpos((string) $value, "\n") !== false): ?>
+                <?php if (isTeamPhotoPath((string) $path)): ?>
+                  <div class="image-field">
+                    <?php if (trim((string) $value) !== ''): ?>
+                      <img src="<?= htmlspecialchars(adminPreviewSrc((string) $value), ENT_QUOTES, 'UTF-8') ?>" alt="">
+                    <?php endif; ?>
+                    <div class="image-controls">
+                      <input name="content[<?= htmlspecialchars((string) $path, ENT_QUOTES, 'UTF-8') ?>]" value="<?= htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8') ?>">
+                      <input type="file" name="image_uploads[<?= htmlspecialchars((string) $path, ENT_QUOTES, 'UTF-8') ?>]" accept="image/jpeg,image/png,image/webp">
+                      <p class="help-text">Envie JPG, PNG ou WebP até 5 MB, ou informe manualmente uma URL/caminho da foto.</p>
+                    </div>
+                  </div>
+                <?php elseif (strlen((string) $value) > 80 || strpos((string) $value, "\n") !== false): ?>
                   <textarea name="content[<?= htmlspecialchars((string) $path, ENT_QUOTES, 'UTF-8') ?>]"><?= htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8') ?></textarea>
                 <?php else: ?>
                   <input name="content[<?= htmlspecialchars((string) $path, ENT_QUOTES, 'UTF-8') ?>]" value="<?= htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8') ?>">

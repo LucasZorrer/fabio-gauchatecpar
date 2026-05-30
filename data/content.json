@@ -83,6 +83,59 @@
     "evidenceLink": "Ver relatórios da Brasil TecPar",
     "evidenceUrl": "https://www.brasiltecpar.com.br/relatoriosanuais"
   },
+  "team": {
+    "label": "Equipe",
+    "title": "Diretoria e Conselho de Administração",
+    "copy": "Conheça a liderança responsável pela governança, estratégia e disciplina financeira da companhia.",
+    "executiveTitle": "Diretoria",
+    "boardTitle": "Conselho de Administração",
+    "executives": [
+      {
+        "photo": "assets/team-placeholder.svg",
+        "name": "Nome do Diretor Presidente",
+        "role": "Diretor Presidente",
+        "caption": "Liderança executiva",
+        "description": "Inclua aqui uma breve descrição sobre trajetória, responsabilidades e foco de atuação."
+      },
+      {
+        "photo": "assets/team-placeholder.svg",
+        "name": "Nome do Diretor Vice-Presidente e RI",
+        "role": "Diretor Vice-Presidente e RI",
+        "caption": "Relações com investidores",
+        "description": "Inclua aqui uma breve descrição sobre trajetória, responsabilidades e foco de atuação."
+      },
+      {
+        "photo": "assets/team-placeholder.svg",
+        "name": "Nome do Diretor Financeiro",
+        "role": "Diretor Financeiro",
+        "caption": "Gestão financeira",
+        "description": "Inclua aqui uma breve descrição sobre trajetória, responsabilidades e foco de atuação."
+      }
+    ],
+    "board": [
+      {
+        "photo": "assets/team-placeholder.svg",
+        "name": "Nome do Conselheiro 1",
+        "role": "Conselheiro de Administração",
+        "caption": "Conselho de Administração",
+        "description": "Inclua aqui uma breve descrição sobre experiência e contribuição para a governança."
+      },
+      {
+        "photo": "assets/team-placeholder.svg",
+        "name": "Nome do Conselheiro 2",
+        "role": "Conselheiro de Administração",
+        "caption": "Conselho de Administração",
+        "description": "Inclua aqui uma breve descrição sobre experiência e contribuição para a governança."
+      },
+      {
+        "photo": "assets/team-placeholder.svg",
+        "name": "Nome do Conselheiro 3",
+        "role": "Conselheiro de Administração",
+        "caption": "Conselho de Administração",
+        "description": "Inclua aqui uma breve descrição sobre experiência e contribuição para a governança."
+      }
+    ]
+  },
   "investors": {
     "label": "Investidores",
     "title": "Uma jornada clara para acessar informações",

@@ -67,8 +67,8 @@ const applySiteContent = (content) => {
       const [path, attribute] = mapping.split(":").map((item) => item.trim());
       const value = getContentValue(content, path);
 
-      if (path && attribute && typeof value === "string") {
-        element.setAttribute(attribute, value);
+      if (path && attribute && typeof value === "string" && value.trim() !== "") {
+        element.setAttribute(attribute, value.trim());
         return;
       }
 
